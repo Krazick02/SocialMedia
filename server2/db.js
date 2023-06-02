@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const MONGO_USERNAME = 'admin';
 const MONGO_PASSWORD = 'password';
-const MONGO_HOSTNAME1 = '192.168.1.79';
+const MONGO_HOSTNAME1 = '172.17.177.196';
 const MONGO_PORT1 = '27017';
 const MONGO_HOSTNAME2 = '172.17.213.42';
 const MONGO_PORT2 = '27017';

@@ -12,9 +12,12 @@ const postSchema = new mongoose.Schema({
         trim: true
     },
     user: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User', 
+        // type: mongoose.Schema.Types.ObjectId, 
+        // ref: 'User', 
         // required: true 
+        type: String,
+        required: true,
+        trim: true
     },
 })
 

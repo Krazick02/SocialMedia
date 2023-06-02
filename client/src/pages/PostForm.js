@@ -22,7 +22,7 @@ export function PostForm() {
     socket.emit('message', {
       title: title,
       description: message,
-      user:user.id
+      user:user.name
     })
   }
 

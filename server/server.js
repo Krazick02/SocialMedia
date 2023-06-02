@@ -36,6 +36,17 @@ io.on('connection', (socket) => {
             console.error('Error al obtener los posts:', error);
         }
     });
+    socket.on('getPost', async (data) => {
+        try {
+            const posts = await Post.find({data});
+            const comments = await Comment.find({data});
+            // console.log(posts)
+            socket.emit('postsData', [posts,comments]);
+        } catch (error) {
+            socket.emit('postsData', []);
+            console.error('Error al obtener los posts:', error);
+        }
+    });
 
     socket.on('message', (data) => {
         console.log('Message received', data);

@@ -39,6 +39,9 @@ export function PostCard({ post }) {
             <div className="px-4 py-7">
                 <div className="flex justify-between">
                     <h3>
+                        {post.user}
+                    </h3>
+                    <h3>
                         {post.title}
                     </h3>
                     <div>
@@ -53,8 +56,8 @@ export function PostCard({ post }) {
                 <p>
                     {post.description}
                 </p>
-
-                {post.image && <img alt="publicaction" src={post.image.url}/>}
+                <button onClick={() => navigate(`/comments/${post._id}`)}>comments</button>
+                {/* {post.image && <img alt="publicaction" src={post.image.url}/>} */}
             </div>
         </div>
     )

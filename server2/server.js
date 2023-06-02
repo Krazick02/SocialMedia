@@ -36,6 +36,7 @@ io.on('connection', (socket) => {
           const existingUser = await User.findOne({ email });
           if (existingUser) {
             socket.emit('registrationError', 'email already exists');
+            console.log('email already exists');
             return;
           }
     
