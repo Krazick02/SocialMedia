@@ -2,7 +2,7 @@ import { PostForm, NotFounfPage, Posts, Home, Register, Login } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { PostProvider } from './context/postContext';
 import { Toaster } from 'react-hot-toast'
-import PrivateRoute from './pages/PrivateRoute.js';
+import PrivateRoute from './components/PrivateRoute.js';
 
 
 function App() {

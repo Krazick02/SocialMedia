@@ -7,6 +7,7 @@ const socket = io('http://localhost:4001')
 
 
 export function Register(){
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirectToHome, setRedirectToHome] = useState(false);
@@ -18,6 +19,7 @@ export function Register(){
   const handleSubmit = (e) => {
     e.preventDefault()
     socket.emit('register', {
+      name: name,
       email: email,
       password: password,
     })
@@ -46,6 +48,8 @@ export function Register(){
         </header>
 
         <form onSubmit={handleSubmit}>
+          <label htmlFor="">Name</label>
+          <input type="text" onChange={e => setName(e.target.value)} />
           <label htmlFor="">Email</label>
           <input type="email" onChange={e => setEmail(e.target.value)} />
           <label htmlFor="">Password</label>
