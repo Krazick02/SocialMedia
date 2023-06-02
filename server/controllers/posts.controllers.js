@@ -1,6 +1,4 @@
 import Post from '../models/Post.js'
-import {deleteImage, uploadImage} from '../libs/cloudinary.js'
-import fs from 'fs-extra'
 
 export const getPosts = async (req, res) => {
     try {
@@ -18,16 +16,6 @@ export const getPosts = async (req, res) => {
 export const createPosts = async (req, res) => {
     try {
         const { title, description } = req.body
-        let image;
-        
-        if(req.files?.image){
-            const result = await uploadImage(req.files.image.tempFilePath)
-            await fs.remove(req.files.image.tempFilePath)
-            image = {
-                url: result.secure_url,
-                public_id: result.public_id
-            }
-        }
         
         const newPost = new Post({ title, description , image})
         await newPost.save()
@@ -41,18 +29,7 @@ export const createPosts = async (req, res) => {
 
 export const updatePosts = async (req, res) => {
     try {
-        let image;
         
-        if(req.files?.image){
-            const result = await uploadImage(req.files.image.tempFilePath)
-            await fs.remove(req.files.image.tempFilePath)
-            image = {
-                url: result.secure_url,
-                public_id: result.public_id
-            }
-
-            req.body.push(image)
-        }
         const post = await Post.findByIdAndUpdate(req.params.id, req.body, { new: true })
         if (!post) {
             return res.status(404).send('Post not updated');
@@ -70,11 +47,6 @@ export const deletePosts = async (req, res) => {
         if (!post) {
             return res.status(404).send('Post not found');
         }
-
-        if(post.image.public_id){
-            await deleteImage(post.image.public_id)
-        }
-
         return res.send('Post deleted');
     } catch (error) {
         console.error(error);
