@@ -3,11 +3,14 @@ import toast from 'react-hot-toast'
 import { usePosts } from "../context/postContext";
 import { useNavigate } from "react-router-dom";
 
+import io from 'socket.io-client'
+
+const socket = io('http://localhost:4000')
+
+
 export function PostCard({ post }) {
 
-    const {deletePost} = usePosts()
     const navigate = useNavigate()
-
 
     const handleDelete = (id) => {
         toast((t) => (
@@ -17,7 +20,7 @@ export function PostCard({ post }) {
                 <div className="flex justify-between">
                     <button onClick={() => toast.dismiss(t.id)}>Cancelar</button>
                     <button onClick={() => {
-                        deletePost(id)
+                        socket.emit('deletePost',id)
                         toast.dismiss(t.id)
                     }}
                         className="bg-red-500 hover:bg-red-400 px-3 py-2 text-sm text-white rounded-md mx-2"
