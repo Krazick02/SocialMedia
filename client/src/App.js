@@ -1,6 +1,7 @@
 import { PostForm, NotFounfPage, Posts, Home, Register, Login } from './pages'
 import { Routes, Route } from 'react-router-dom'
 import { PostProvider } from './context/postContext';
+import AuthProvider from './context/AuthProvider';
 import { Toaster } from 'react-hot-toast'
 import PrivateRoute from './components/PrivateRoute.js';
 
@@ -9,6 +10,7 @@ function App() {
   return (
     <div className='bg-neutral-900 min-h-screen flex items-center'>
       <div className='px-10 container m-auto'>
+        <AuthProvider>
           <PostProvider>
             <Routes>
               <Route path='/' element={<Home />} />
@@ -21,6 +23,7 @@ function App() {
             </Routes>
             <Toaster />
           </PostProvider>
+        </AuthProvider>
       </div>
     </div >
   );

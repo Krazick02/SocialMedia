@@ -1,15 +1,17 @@
-import { usePosts } from "../context/postContext"
 import { useNavigate, useParams, Link } from "react-router-dom"
 import { useEffect, useState } from "react"
-import { VscLoading } from "react-icons/vsc";
 import io from 'socket.io-client'
+import useAuth from "../context/useAuth"
+
 
 const socket = io('http://localhost:4000')
 
 export function PostForm() {
+
   const [message, setMessage] = useState('');
   const [title, setTitle] = useState('');
   const [redirectToHome, setRedirectToHome] = useState(false);
+  const {user} = useAuth()
 
   let redir = () => {
     window.location.href = `/posts`;
@@ -20,6 +22,7 @@ export function PostForm() {
     socket.emit('message', {
       title: title,
       description: message,
+      user:user.id
     })
   }
 

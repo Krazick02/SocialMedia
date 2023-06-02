@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import io from 'socket.io-client'
+import useAuth from '../context/useAuth';
 
 
 const socket = io('http://localhost:4001')
@@ -10,6 +11,9 @@ export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginResponse, setLoginResponse] = useState({ success: null, message: '' });
+
+  const {login, user} = useAuth()
+
   const history = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -23,6 +27,8 @@ export function Login() {
     socket.on('loginResponse', (data) => {
       setLoginResponse(data);
       if (data.success) {
+        login(data.user)
+        console.log(data)
         history("/posts")
       }
     });
@@ -40,7 +46,6 @@ export function Login() {
           <h3 className="text-xl"> Iniciar sesion</h3>
           <Link to='/' className="text-gray-400 text-sm hover:text-gray-300"> Regresar</Link>
         </header>
-
         <form onSubmit={handleSubmit}>
           <label htmlFor="">Email</label>
           <input type="email" onChange={e => setEmail(e.target.value)} />
