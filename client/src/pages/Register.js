@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import io from 'socket.io-client'
 
-const socket = io('http://localhost:4001')
+const socket = io('http://172.17.179.199:4001')
 
 
 export function Register(){
@@ -19,7 +19,7 @@ export function Register(){
   const handleSubmit = (e) => {
     e.preventDefault()
     socket.emit('register', {
-      name: name,
+      name: name, 
       email: email,
       password: password,
     })

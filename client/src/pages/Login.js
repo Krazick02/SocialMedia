@@ -4,7 +4,7 @@ import io from 'socket.io-client'
 import useAuth from '../context/useAuth';
 
 
-const socket = io('http://localhost:4001')
+const socket = io('http://172.17.179.199:4001')
 
 
 export function Login() {
