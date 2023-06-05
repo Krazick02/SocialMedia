@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import io from 'socket.io-client'
 import useAuth from '../context/useAuth';
 
 
-const socket = io('http://172.17.179.199:4001')
+const socket = io('http://localhost:4000')
 
 
 export function Login() {
@@ -12,7 +12,7 @@ export function Login() {
   const [password, setPassword] = useState('');
   const [loginResponse, setLoginResponse] = useState({ success: null, message: '' });
 
-  const {login, user} = useAuth()
+  const {login} = useAuth()
 
   const history = useNavigate();
   const handleSubmit = (e) => {
@@ -42,18 +42,18 @@ export function Login() {
     <div className="flex items-center justify-center" >
       <div className="bg-zinc-800 p-10 shadow-md shadow-black">
 
-        <header className="flex items-center py-4 px-4 text-white justify-between">
-          <h3 className="text-xl"> Iniciar sesion</h3>
-          <Link to='/' className="text-gray-400 text-sm hover:text-gray-300"> Regresar</Link>
+        <header className="flex items-center py-4 px-4 text-white justify-center">
+          <h3 className="text-5xl border-4"> Iniciar sesion</h3>
         </header>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="text-white text2xl justify-center">
           <label htmlFor="">Email</label>
           <input type="email" onChange={e => setEmail(e.target.value)} />
           <label htmlFor="">Password</label>
           <input type="password" onChange={e => setPassword(e.target.value)} />
-          <button>Send</button>
           {loginResponse.success === false && <p>{loginResponse.message}</p>}
+          <button>Send</button>
         </form>
+          <Link to='/' className="text-gray-400 text-sm hover:text-gray-300"> Regresar</Link>
       </div>
     </div>
   )

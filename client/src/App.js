@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom'
 import { PostProvider } from './context/postContext';
 import AuthProvider from './context/AuthProvider';
 import { Toaster } from 'react-hot-toast'
-import PrivateRoute from './components/PrivateRoute.js';
 
 
 function App() {
@@ -18,8 +17,8 @@ function App() {
               <Route path='/login' element={<Login />} />
               <Route path='/posts' element={<Posts />} />
               <Route path='/new' element={<PostForm />} />
-              <Route path='/posts/:id' element={<PostForm />} />
-              {/* <Route path='/comments/:id' element={<PostWComments />} /> */}
+              {/* <Route path='/posts/:id' element={<PostForm />} /> */}
+              <Route path='/comments/:id' element={<PostWComments />} />
               <Route path='*' element={<NotFounfPage />} />
             </Routes>
             <Toaster />

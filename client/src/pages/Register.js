@@ -1,44 +1,52 @@
-import React, {useEffect, useState} from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 import io from 'socket.io-client'
 
-const socket = io('http://172.17.179.199:4001')
+const local = io('http://localhost:4000')
+const maquina1 = io('http://localhost:4001')
+const maquina2 = io('http://localhost:4002')
 
 
-export function Register(){
+export function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [redirectToHome, setRedirectToHome] = useState(false);
-
-  let redir = () => {
-    window.location.href = `/`;
-  }
-
+  const [registerResponse, setRegisterResponse] = useState({ success: null, message: '' });
+  const history = useNavigate()
   const handleSubmit = (e) => {
     e.preventDefault()
-    socket.emit('register', {
-      name: name, 
+    local.emit('register', {
+      name: name,
+      email: email,
+      password: password,
+    })
+    maquina1.emit('register', {
+      name: name,
+      email: email,
+      password: password,
+    })
+    maquina2.emit('register', {
+      name: name,
       email: email,
       password: password,
     })
   }
 
   useEffect(() => {
-    socket.on('registrationSuccess', () => {
-      setRedirectToHome(true);
+    local.on('registerResponse', (data) => {
+      setRegisterResponse(data);
+      if (data.success) {
+        console.log(data)
+        history("/")
+      }
     });
 
     return () => {
-      socket.off('registrationSuccess');
+      local.off('registerResponse');
     };
   }, []);
-
-  if (redirectToHome) {
-    redir()
-  }
-  return(
+  return (
     <div className="flex items-center justify-center" >
       <div className="bg-zinc-800 p-10 shadow-md shadow-black">
 
@@ -55,6 +63,8 @@ export function Register(){
           <label htmlFor="">Password</label>
           <input type="password" onChange={e => setPassword(e.target.value)} />
           <button>Send</button>
+          {registerResponse.success === false && <p>{registerResponse.message}</p>}
+
         </form>
       </div>
     </div>

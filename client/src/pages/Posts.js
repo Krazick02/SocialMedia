@@ -1,7 +1,7 @@
 import { VscEmptyWindow } from 'react-icons/vsc'
-import { Link , useNavigate, useLocation} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { PostCard } from "../components/PostCard"
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import io from 'socket.io-client'
 
 const socket = io('http://localhost:4000')
