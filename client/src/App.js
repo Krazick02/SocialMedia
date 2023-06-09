@@ -7,8 +7,8 @@ import { Toaster } from 'react-hot-toast'
 
 function App() {
   return (
-    <div className='bg-neutral-900 min-h-screen flex items-center'>
-      <div className='px-10 container m-auto'>
+    <div className=' bg-neutral-900 '>
+      <div className='bg-neutral-900'>
         <AuthProvider>
           <PostProvider>
             <Routes>
