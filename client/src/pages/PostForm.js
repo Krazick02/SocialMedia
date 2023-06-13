@@ -99,14 +99,23 @@ export function PostForm() {
             <Link to='/posts' className="text-gray-400 text-sm hover:text-gray-300"> Regresar</Link>
           </header>
 
-          <form onSubmit={handleSubmitUpdate}>
-            <label htmlFor="">Title</label>
-            <input type="text" onChange={e => setTitle(e.target.value)} value={title} />
-            <label htmlFor="">Post</label>
-            <input type="text" onChange={e => setMessage(e.target.value)} value={message} />
-            <button>Send</button>
-            {postResponse.success === false && <p>{postResponse.message}</p>}
-          </form>
+          <div className="p-5 m-5">
+            <form onSubmit={handleSubmitUpdate}>
+              <div className="p-2 m-3">
+                <label htmlFor="" className="text-white p-4">Title</label>
+                <input type="text" onChange={e => setTitle(e.target.value)} value={title} />
+              </div>
+              <div className="p-2 m-3">
+                <label htmlFor="" className="text-white p-4">Post</label>
+                <input onChange={e => setMessage(e.target.value)} value={message} />
+              </div>
+              <div className="p-2 m-3 justify-center flex">
+                <button className="bg-blue-700 hover:bg-blue-500 rounded p-1">Send</button>
+                {postResponse.success === false && <p>{postResponse.message}</p>}
+
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     )
@@ -120,14 +129,23 @@ export function PostForm() {
           <Link to='/' className="text-gray-400 text-sm hover:text-gray-300"> Regresar</Link>
         </header>
 
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="">Title</label>
-          <input type="text" onChange={e => setTitle(e.target.value)} />
-          <label htmlFor="">Post</label>
-          <input type="text" onChange={e => setMessage(e.target.value)} />
-          <button>Send</button>
-          {postResponse.success === false && <p>{postResponse.message}</p>}
-        </form>
+        <div className="p-5 m-5">
+          <form onSubmit={handleSubmit}>
+            <div className="p-2 m-3">
+              <label htmlFor="" className="text-white p-4">Title</label>
+              <input type="text" onChange={e => setTitle(e.target.value)} value={title} />
+            </div>
+            <div className="p-2 m-3">
+              <label htmlFor="" className="text-white p-4">Post</label>
+              <input onChange={e => setMessage(e.target.value)} value={message} />
+            </div>
+            <div className="p-2 m-3 justify-center flex">
+              <button className="bg-blue-700 hover:bg-blue-500 rounded p-1">Send</button>
+              {postResponse.success === false && <p>{postResponse.message}</p>}
+
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )

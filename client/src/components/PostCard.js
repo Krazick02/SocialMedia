@@ -42,33 +42,22 @@ export function PostCard({ post }) {
     return (
         <div className="bg-zinc-800 text-white rounded-sm shadow-md shadow-black hover:bg-zinc-700 hover:cursor-pointer">
             <div className="px-4 py-7">
-                <div className="flex justify-between">
+                <div className="">
                     <h3>
-                        {post.user}
+                    Published by : {post.user}
                     </h3>
                     <h3>
-                        {post.title}
+                        Title : {post.title}
                     </h3>
-                    {/* { }{
-
-                    }
-                    {(() => {
-                        if (user.name === post.user) {
-                            return <div>
-                                <button onClick={() => navigate(`/posts/${post._id}`)}><IoMdCreate className="w-5 h-5 text-white" /></button>
-                                <button onClick={(e) => {
-                                    e.stopPropagation()
-                                    handleDelete(post._id)
-                                }}><IoIosTrash className="w-5 h-5 text-white" /></button>
-                            </div>;
-                        }
-                    })()} */}
                 </div>
 
-                <p>
+                <div className="m-5 p-5">
                     {post.description}
-                </p>
-                <button onClick={() => navigate(`/comments/${post._id}`)}>comments</button>
+                </div>
+                <div className="flex justify-between">
+                <button onClick={() => navigate(`/comments/${post._id}`)}>See comments</button>
+
+                </div>
                 {/* {post.image && <img alt="publicaction" src={post.image.url}/>} */}
             </div>
         </div>

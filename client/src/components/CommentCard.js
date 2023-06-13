@@ -35,27 +35,18 @@ export function CommentCard({ comment }) {
     }
 
     return (
-        <div className="bg-zinc-800 text-white rounded-sm shadow-md shadow-black hover:bg-zinc-700 hover:cursor-pointer">
+        <div className="p-2 m-5 bg-zinc-700 text-white rounded-sm shadow-md shadow-black hover:bg-zinc-600 hover:cursor-pointer">
             <div className="px-4 py-7">
                 <div className="flex justify-between">
                     <h3>
-                        {comment.user}
+                        Reply by : {comment.user}
                     </h3>
-                    {/* {(() => {
-                        if (user.name === comment.user) {
-                            return <div>
-                                <button onClick={(e) => {
-                                    e.stopPropagation()
-                                    handleDelete(comment._id)
-                                }}><IoIosTrash className="w-5 h-5 text-white" /></button>
-                            </div>;
-                        }
-                    })()} */}
                 </div>
-
-                <p>
-                    {comment.description}
-                </p>
+                <div className="p-5 m-5">
+                    <p>
+                        {comment.description}
+                    </p>
+                </div>
             </div>
         </div>
     )
